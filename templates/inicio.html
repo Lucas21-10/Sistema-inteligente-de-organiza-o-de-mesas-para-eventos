@@ -1,16 +1,171 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SmartTable</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 </head>
+
 <body>
 
-    <h1>SmartTable</h1>
+    <header class="cabecalho">
+        <div class="logo">
+            <span class="logo-icone">◆</span>
+            <span>SmartTable</span>
+        </div>
 
-    <p>Melhor distribuição: {{ melhor.genes }}</p>
-    <p>Fitness: {{ fitness }}</p>
-    <p>Gerações: {{ geracoes }}</p>
+        <div class="status">
+            <span class="status-ponto"></span>
+            Algoritmo pronto
+        </div>
+    </header>
+
+
+    <main class="container">
+
+        <section class="hero">
+
+            <div class="hero-texto">
+                <span class="etiqueta">ORGANIZAÇÃO INTELIGENTE</span>
+
+                <h1>
+                    Organize seus eventos
+                    <span>com inteligência.</span>
+                </h1>
+
+                <p>
+                    O SmartTable utiliza Algoritmo Genético para encontrar
+                    uma distribuição eficiente dos convidados nas mesas.
+                </p>
+            </div>
+
+        </section>
+
+
+        <section class="indicadores">
+
+            <div class="card-indicador">
+                <span class="indicador-icone">👥</span>
+
+                <div>
+                    <span class="indicador-label">Convidados</span>
+                    <strong>{{ melhor.genes|length }}</strong>
+                </div>
+            </div>
+
+
+            <div class="card-indicador">
+                <span class="indicador-icone">◆</span>
+
+                <div>
+                    <span class="indicador-label">Fitness</span>
+                    <strong>{{ fitness }}</strong>
+                </div>
+            </div>
+
+
+            <div class="card-indicador">
+                <span class="indicador-icone">↻</span>
+
+                <div>
+                    <span class="indicador-label">Gerações</span>
+                    <strong>{{ geracoes }}</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="resultado">
+
+            <div class="secao-cabecalho">
+                <div>
+                    <span class="etiqueta">RESULTADO</span>
+                    <h2>Distribuição das mesas</h2>
+                </div>
+
+                <span class="badge-sucesso">
+                    ✓ Solução encontrada
+                </span>
+            </div>
+
+
+            <div class="mesas">
+
+                {% for mesa in range(1, 4) %}
+
+                <div class="mesa">
+
+                    <div class="mesa-cabecalho">
+                        <div>
+                            <span class="mesa-numero">0{{ mesa }}</span>
+                            <h3>Mesa {{ mesa }}</h3>
+                        </div>
+
+                        <span class="mesa-status">Otimizada</span>
+                    </div>
+
+
+                    <div class="lugares">
+
+                        {% for indice in range(melhor.genes|length) %}
+
+                            {% if melhor.genes[indice] == mesa %}
+
+                            <div class="convidado">
+                                <span class="avatar">
+                                    {{ indice + 1 }}
+                                </span>
+
+                                <span>
+                                    Convidado {{ indice + 1 }}
+                                </span>
+                            </div>
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <section class="informacao">
+
+            <div>
+                <span class="informacao-icone">✦</span>
+
+                <div>
+                    <strong>Como o SmartTable funciona?</strong>
+
+                    <p>
+                        O algoritmo avalia diferentes combinações de mesas,
+                        seleciona as melhores soluções e evolui a população
+                        ao longo das gerações.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <span>SmartTable</span>
+        <span>Sistema Inteligente de Organização de Eventos</span>
+    </footer>
 
 </body>
 </html>
