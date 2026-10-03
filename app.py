@@ -1,8 +1,4 @@
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-from flask import Flask
+from flask import Flask, render_template, request
 
 from dados.evento import Evento
 from algoritmo_genetico.genetico import executar_algoritmo_genetico
@@ -39,10 +35,38 @@ def inicio():
     )
 
     return render_template(
+        "inicio.html",
+        melhor=melhor,
+        fitness=fitness,
+        geracoes=len(historico)
+    )
+
+
+@app.route("/organizar", methods=["POST"])
+def organizar():
+    convidados = request.form.getlist("convidados")
+    quantidade_mesas = int(request.form["quantidade_mesas"])
+
+    evento = Evento(
+        convidados=convidados,
+        quantidade_mesas=quantidade_mesas,
+        capacidade_mesa=2,
+        preferencias=[],
+        conflitos=[]
+    )
+
+    melhor, fitness, historico = executar_algoritmo_genetico(
+        evento,
+        tamanho_populacao=50,
+        numero_geracoes=50
+    )
+
+    return render_template(
     "inicio.html",
     melhor=melhor,
     fitness=fitness,
-    geracoes=len(historico)
+    geracoes=len(historico),
+    convidados=convidados
 )
 
 

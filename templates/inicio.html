@@ -45,6 +45,67 @@
 
         </section>
 
+        <section class="configuracao">
+
+    <div class="secao-cabecalho">
+        <div>
+            <span class="etiqueta">CONFIGURAÇÃO</span>
+            <h2>Prepare seu evento</h2>
+        </div>
+    </div>
+
+    <form method="POST" action="/organizar">
+
+        <div class="campo">
+            <label for="quantidade_mesas">
+                Quantidade de mesas
+            </label>
+
+            <input
+                type="number"
+                id="quantidade_mesas"
+                name="quantidade_mesas"
+                min="1"
+                max="50"
+                value="3"
+                required
+            >
+        </div>
+
+        <div class="campo convidados-campo">
+
+            <label>
+                Convidados
+            </label>
+
+            <div id="lista-convidados">
+
+                <input
+                    type="text"
+                    name="convidados"
+                    placeholder="Nome do convidado"
+                    required
+                >
+
+            </div>
+
+            <button type="button" id="adicionar-convidado">
+                + Adicionar convidado
+            </button>
+
+        </div>
+
+        <button type="submit" class="botao-principal">
+            Organizar evento
+        </button>
+
+    </form>
+
+</section>
+
+
+
+
 
         <section class="indicadores">
 
@@ -122,7 +183,7 @@
                                 </span>
 
                                 <span>
-                                    Convidado {{ indice + 1 }}
+                                    {{ convidados[indice] }}
                                 </span>
                             </div>
 
@@ -166,6 +227,8 @@
         <span>SmartTable</span>
         <span>Sistema Inteligente de Organização de Eventos</span>
     </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>
