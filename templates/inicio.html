@@ -72,6 +72,22 @@
             >
         </div>
 
+        <div class="campo">
+            <label for="capacidade_mesa">
+                Capacidade por mesa
+            </label>
+
+        <input
+            type="number"
+            id="capacidade_mesa"
+            name="capacidade_mesa"
+            min="1"
+            max="50"
+            value="2"
+            required
+        >
+        </div>
+
         <div class="campo convidados-campo">
 
             <label>
@@ -157,7 +173,7 @@
 
             <div class="mesas">
 
-                {% for mesa in range(1, 4) %}
+                {% for mesa in range(1, quantidade_mesas + 1) %}
 
                 <div class="mesa">
 

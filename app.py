@@ -38,7 +38,9 @@ def inicio():
         "inicio.html",
         melhor=melhor,
         fitness=fitness,
-        geracoes=len(historico)
+        geracoes=len(historico),
+        convidados=evento.convidados,
+        quantidade_mesas=evento.quantidade_mesas
     )
 
 
@@ -46,11 +48,12 @@ def inicio():
 def organizar():
     convidados = request.form.getlist("convidados")
     quantidade_mesas = int(request.form["quantidade_mesas"])
+    capacidade_mesa = int(request.form["capacidade_mesa"])
 
     evento = Evento(
         convidados=convidados,
         quantidade_mesas=quantidade_mesas,
-        capacidade_mesa=2,
+        capacidade_mesa=capacidade_mesa,
         preferencias=[],
         conflitos=[]
     )
@@ -62,12 +65,13 @@ def organizar():
     )
 
     return render_template(
-    "inicio.html",
-    melhor=melhor,
-    fitness=fitness,
-    geracoes=len(historico),
-    convidados=convidados
-)
+        "inicio.html",
+        melhor=melhor,
+        fitness=fitness,
+        geracoes=len(historico),
+        convidados=convidados,
+        quantidade_mesas=quantidade_mesas
+    )
 
 
 if __name__ == "__main__":
