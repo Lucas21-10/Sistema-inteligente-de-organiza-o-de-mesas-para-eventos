@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import json
+import time
 
 from dados.evento import Evento
 from algoritmo_genetico.genetico import executar_algoritmo_genetico
@@ -29,11 +30,17 @@ def inicio():
         conflitos=[]
     )
 
+    inicio = time.perf_counter()
+
     melhor, fitness, historico = executar_algoritmo_genetico(
         evento,
         tamanho_populacao=50,
         numero_geracoes=50
     )
+
+    fim = time.perf_counter()
+
+    tempo_execucao = fim - inicio
 
     return render_template(
         "inicio.html",
@@ -41,7 +48,8 @@ def inicio():
         fitness=fitness,
         geracoes=len(historico),
         convidados=evento.convidados,
-        quantidade_mesas=evento.quantidade_mesas
+        quantidade_mesas=evento.quantidade_mesas,
+        tempo_execucao=tempo_execucao
     )
 
 
@@ -80,11 +88,17 @@ def organizar():
         conflitos=conflitos
     )
 
+    inicio = time.perf_counter()
+
     melhor, fitness, historico = executar_algoritmo_genetico(
         evento,
         tamanho_populacao=50,
         numero_geracoes=50
     )
+
+    fim = time.perf_counter()
+
+    tempo_execucao = fim - inicio
 
     preferencias_atendidas = 0
     conflitos_encontrados = 0
@@ -105,7 +119,8 @@ def organizar():
         convidados=convidados,
         quantidade_mesas=quantidade_mesas,
         preferencias_atendidas=preferencias_atendidas,
-        conflitos_encontrados=conflitos_encontrados
+        conflitos_encontrados=conflitos_encontrados,
+        tempo_execucao=tempo_execucao
     )
 
 
