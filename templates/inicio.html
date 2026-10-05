@@ -111,6 +111,54 @@
 
         </div>
 
+        <div class="campo relacionamentos-campo">
+
+            <label>
+                Preferências e conflitos
+            </label>
+
+            <div class="relacionamento-form">
+
+                <select id="pessoa-1">
+                    <option value="">Pessoa 1</option>
+
+                    {% for convidado in convidados %}
+                        <option value="{{ loop.index0 }}">
+                            {{ convidado }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <select id="tipo-relacionamento">
+                    <option value="preferencia">
+                         Preferência
+                    </option>
+
+                    <option value="conflito">
+                         Conflito
+                    </option>
+                </select>
+
+                <select id="pessoa-2">
+                    <option value="">Pessoa 2</option>
+
+                    {% for convidado in convidados %}
+                        <option value="{{ loop.index0 }}">
+                            {{ convidado }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button type="button" id="adicionar-relacionamento">
+                    + Adicionar
+                </button>
+
+            </div>
+
+            <div id="lista-relacionamentos"></div>
+
+        </div>
+
         <button type="submit" class="botao-principal">
             Organizar evento
         </button>
@@ -143,6 +191,24 @@
                     <strong>{{ fitness }}</strong>
                 </div>
             </div>
+
+        <div class="card-indicador">
+                 <span class="indicador-icone">❤️</span>
+
+            <div>
+                <span class="indicador-label">Preferências atendidas</span>
+                <strong>{{ preferencias_atendidas }}</strong>
+            </div>
+        </div>
+
+        <div class="card-indicador">
+            <span class="indicador-icone">⚡</span>
+
+            <div>
+                <span class="indicador-label">Conflitos</span>
+                <strong>{{ conflitos_encontrados }}</strong>
+            </div>
+        </div>
 
 
             <div class="card-indicador">

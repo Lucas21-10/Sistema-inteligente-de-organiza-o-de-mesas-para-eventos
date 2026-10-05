@@ -96,7 +96,11 @@ def executar_algoritmo_genetico(
 
         historico_fitness.append(melhor_fitness)
 
-        nova_populacao = []
+        melhor_da_geracao = resultados[0][0]
+
+        nova_populacao = [
+            Individuo(melhor_da_geracao.genes.copy())
+        ]
 
         while len(nova_populacao) < tamanho_populacao:
             pai_1 = selecionar_por_torneio(resultados)
